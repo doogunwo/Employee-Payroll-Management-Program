@@ -18,6 +18,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import DB.DataBase;
+
 
 
 public class Test extends JFrame {

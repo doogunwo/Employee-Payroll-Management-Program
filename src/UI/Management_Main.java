@@ -1,15 +1,23 @@
 
 package UI;
+//임포트 
+import DB.DataBase;
+
+
+
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import java.awt.Panel;
 import javax.swing.JButton;
@@ -19,10 +27,19 @@ import javax.swing.border.LineBorder;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.awt.SystemColor;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import java.awt.Component;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class Management_Main extends JFrame {
 
@@ -47,7 +64,12 @@ public class Management_Main extends JFrame {
 	private JTextField textField_18;
 	private JTextField textField_19;
 	private JTextField textField_20;
-
+	
+	DataBase dbConn = new DataBase();
+	//디비 클래스 선언.
+	private JScrollPane scp;
+	private JScrollPane sc4;
+	private JScrollPane sc4_1;
 	/**
 	 * Launch the application.
 	 */
@@ -67,9 +89,10 @@ public class Management_Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public Management_Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1049, 803);
+		setBounds(100, 100, 1799, 803);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.activeCaption);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,53 +105,107 @@ public class Management_Main extends JFrame {
 		tab1.setFont(new Font("Arial Black", Font.BOLD, 12));
 		tab1.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		tab1.setToolTipText("");
-		tab1.setBounds(22, 67, 988, 595);
+		tab1.setBounds(22, 67, 1497, 687);
 		contentPane.add(tab1);
 		
 		Panel panel3 = new Panel();
 		tab1.addTab("TAB2", null, panel3, null);
 		panel3.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(25, 10, 235, 570);
-		panel3.add(panel);
-		panel.setLayout(null);
+		JPanel searchPanel = new JPanel();
+		searchPanel.setBackground(Color.LIGHT_GRAY);
+		searchPanel.setBounds(664, 155, 462, 501);
+		panel3.add(searchPanel);
+		searchPanel.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("전체사원목록");
-		lblNewLabel_1.setBounds(54, 185, 92, 132);
-		panel.add(lblNewLabel_1);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		panel_1.setBounds(296, 155, 235, 425);
-		panel3.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel_2 = new JLabel("검색된 사원 목록");
-		lblNewLabel_2.setBounds(12, 132, 184, 53);
-		panel_1.add(lblNewLabel_2);
+		JScrollPane sc3 = new JScrollPane();
+		sc3.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		sc3.setBounds(0, 0, 462, 422);
+		searchPanel.add(sc3);
 		
 		textField_2 = new JTextField();
-		textField_2.setText("검색칸\r\n");
-		textField_2.setBounds(296, 124, 235, 21);
+		textField_2.setBounds(664, 124, 157, 21);
 		panel3.add(textField_2);
 		textField_2.setColumns(10);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("사원번호");
-		rdbtnNewRadioButton.setBounds(296, 42, 121, 23);
+		rdbtnNewRadioButton.setBounds(658, 48, 121, 23);
 		panel3.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("부서명");
-		rdbtnNewRadioButton_1.setBounds(296, 67, 121, 23);
+		rdbtnNewRadioButton_1.setBounds(658, 68, 121, 23);
 		panel3.add(rdbtnNewRadioButton_1);
 		
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("이름");
-		rdbtnNewRadioButton_2.setBounds(296, 95, 121, 23);
+		rdbtnNewRadioButton_2.setBounds(658, 95, 121, 23);
 		panel3.add(rdbtnNewRadioButton_2);
 		
+		JButton btnNewButton = new JButton("검색");
+		btnNewButton.setBounds(833, 123, 74, 23);
+		panel3.add(btnNewButton);
+		
+		JPanel sc2 = new JPanel();
+		sc2.setBackground(Color.LIGHT_GRAY);
+		sc2.setBounds(12, 44, 626, 614);
+		panel3.add(sc2);
+		sc2.setLayout(null);
+		//시작
+		JScrollPane scrollPane = new JScrollPane();
+		JTable table;
+		DefaultTableModel tableModel;
+		Object[][] data = new Object[0][5]; // 일단 빈 row 값 삽입, 이때 두번째 인덱스 값 9은 9개의 열이 존제한다는 뜻으로 선언
+		String[] columnNames = { "사원번호", "부서", "이름", "연락처","직급","이메일"};
+		tableModel = new DefaultTableModel(data, columnNames);
+		table = new JTable(tableModel);
+		
+		
+		Panel Panel_table = new Panel();
+		Panel_table.setBounds(10, 0, 458, 560);
+		
+		Panel_table.setLayout(null);
+		
+		try {
+			String str = "select 사원번호,이름,부서,연락처,직급,이메일 from 사원 ";
+			ResultSet src = dbConn.executeQurey(str);
+			while (src.next()) {
+							
+					
+				// 스트링 str1 = src.getString("사원번호");
+				// 123456
+				Object[] tmp = new Object[7];
+				
+				tmp[0]  =src.getString("사원번호");
+				tmp[1]  =src.getString("부서");
+				tmp[2]  =src.getString("이름");
+				tmp[3]  =src.getString("연락처");
+				tmp[4]  =src.getString("직급");
+				tmp[5]  =src.getString("이메일");
+				
+				//
+			
+				tableModel.addRow(tmp);
+		
+			}
+		}
+		 catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		sc2.setLayout(null);
+		
+		scp = new JScrollPane(table);
+		
+		scp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scp.setViewportBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, SystemColor.textText));
+		scp.setBounds(0, 0, 641, 532);
+		sc2.add(scp);
+		//종료 
+		
+		scp.setBounds(0, 0, 622, 532);
+		sc2.add(scp);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(547, 26, 352, 554);
+		tabbedPane.setBounds(1145, 46, 271, 554);
 		panel3.add(tabbedPane);
 		
 		JPanel panel_2 = new JPanel();
@@ -281,25 +358,91 @@ public class Management_Main extends JFrame {
 		panel4.setLayout(null);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBounds(37, 10, 348, 551);
+		panel_7.setBounds(37, 10, 790, 642);
 		panel4.add(panel_7);
 		panel_7.setLayout(null);
 		
-		JLabel lblNewLabel_6 = new JLabel("전체사원목록");
-		lblNewLabel_6.setBounds(38, 184, 245, 79);
-		panel_7.add(lblNewLabel_6);
 		
+		JScrollPane sc4= new JScrollPane();
+		JTable table2;
+		DefaultTableModel tableMode2;
+		Object[][] data2 = new Object[0][5]; // 일단 빈 row 값 삽입, 이때 두번째 인덱스 값 9은 9개의 열이 존제한다는 뜻으로 선언
+		String[] columnNames2 = { "사원번호", "부서", "이름", "연락처","직급","이메일"};
+		tableModel = new DefaultTableModel(data, columnNames);
+		table2 = new JTable(tableModel);
+		
+		
+		Panel Panel_table2 = new Panel();
+		Panel_table.setBounds(10, 0, 458, 560);
+		
+		Panel_table.setLayout(null);
+		
+		try {
+			String str = "select 사원번호,이름,부서,연락처,직급,이메일 from 사원";
+			ResultSet src = dbConn.executeQurey(str);
+			while (src.next()) {
+							
+					
+				
+				Object[] tmp = new Object[7];
+				
+				tmp[0]  =src.getString("사원번호");
+				tmp[1]  =src.getString("부서");
+				tmp[2]  =src.getString("이름");
+				tmp[3]  =src.getString("연락처");
+				tmp[4]  =src.getString("직급");
+				tmp[5]  =src.getString("이메일");
+				
+				
+				
+				
+				tableModel.addRow(tmp);
+		
+			}
+		}
+		 catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		sc2.setLayout(null);
 		JPanel panel_8 = new JPanel();
-		panel_8.setBounds(436, 10, 482, 297);
+		
+		JLabel no1 = new JLabel("1");
+		no1.setBounds(49, 76, 106, 55);
+		panel_8.add(no1);
+		
+		sc4_1 = new JScrollPane(table2);
+		sc4_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if( e.getButton()==1) {
+				
+					int row=table2.getSelectedRow();
+					
+					System.out.print(table2.getValueAt(row, 0));
+				}
+				
+			}
+		});
+		sc4_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		
+		
+		
+		
+		sc4_1.setBounds(0, 0, 790, 642);
+		
+		
+		panel_7.add(sc4_1);
+		
+		panel_8.setBounds(858, 10, 482, 366);
 		panel4.add(panel_8);
 		panel_8.setLayout(null);
 		
-		JLabel lblNewLabel_7 = new JLabel("클릭한 사원급여");
-		lblNewLabel_7.setBounds(193, 108, 126, 68);
-		panel_8.add(lblNewLabel_7);
+		
 		
 		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(435, 317, 483, 244);
+		panel_9.setBounds(858, 404, 483, 244);
 		panel4.add(panel_9);
 		panel_9.setLayout(null);
 		

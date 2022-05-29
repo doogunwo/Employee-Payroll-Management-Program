@@ -17,6 +17,8 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import DB.DataBase;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -30,6 +32,8 @@ import java.awt.ScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.SystemColor;
 import javax.swing.border.TitledBorder;
+
+
 public class Main1 extends JFrame {
 
 	private JPanel contentPane;
@@ -102,8 +106,8 @@ public class Main1 extends JFrame {
 		
 		JTable table;
 		DefaultTableModel tableModel;
-		Object[][] data = new Object[0][6]; // 일단 빈 row 값 삽입, 이때 두번째 인덱스 값 9은 9개의 열이 존제한다는 뜻으로 선언
-		String[] columnNames = { "사원번호", "부서명", "이름", "연락처","직급","이메일","상태"};
+		Object[][] data = new Object[0][5]; // 일단 빈 row 값 삽입, 이때 두번째 인덱스 값 9은 9개의 열이 존제한다는 뜻으로 선언
+		String[] columnNames = { "사원번호", "부서", "이름", "연락처","직급","이메일"};
 		tableModel = new DefaultTableModel(data, columnNames);
 		table = new JTable(tableModel);
 		
@@ -114,7 +118,7 @@ public class Main1 extends JFrame {
 		Panel_table.setLayout(null);
 		
 		try {
-			String str = "select 사원번호,부서명,이름,연락처,직급,이메일,상태 from 사원정보";
+			String str = "select 사원번호,이름,부서,연락처,직급,이메일 from 사원";
 			ResultSet src = dbConn.executeQurey(str);
 			while (src.next()) {
 							
@@ -123,12 +127,12 @@ public class Main1 extends JFrame {
 				Object[] tmp = new Object[7];
 				
 				tmp[0]  =src.getString("사원번호");
-				tmp[1]  =src.getString("부서명");
+				tmp[1]  =src.getString("부서");
 				tmp[2]  =src.getString("이름");
 				tmp[3]  =src.getString("연락처");
 				tmp[4]  =src.getString("직급");
 				tmp[5]  =src.getString("이메일");
-				tmp[6]  =src.getString("상태");
+				
 				
 				
 				
@@ -141,11 +145,10 @@ public class Main1 extends JFrame {
 			e.printStackTrace();
 		}
 		sc.setLayout(null);
-		
-		
-		
-		
 		JScrollPane scrollPane = new JScrollPane(table);
+		
+		
+		
 		scrollPane.setViewportBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, SystemColor.textText));
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
