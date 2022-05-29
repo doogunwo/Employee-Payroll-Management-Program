@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-
+import Object.User;
 public class Management_Main extends JFrame {
 
 	private JPanel contentPane;
@@ -65,6 +65,8 @@ public class Management_Main extends JFrame {
 	private JTextField textField_19;
 	private JTextField textField_20;
 	
+	
+	
 	DataBase dbConn = new DataBase();
 	//디비 클래스 선언.
 	private JScrollPane scp;
@@ -77,7 +79,8 @@ public class Management_Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Management_Main frame = new Management_Main();
+					User us = null;
+					Management_Main frame = new Management_Main(us);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,7 +93,7 @@ public class Management_Main extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public Management_Main() {
+	public Management_Main(User us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1799, 803);
 		contentPane = new JPanel();

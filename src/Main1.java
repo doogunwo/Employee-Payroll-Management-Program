@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import DB.DataBase;
+import UI.Log;
 
 import java.awt.Font;
 import java.awt.Image;
