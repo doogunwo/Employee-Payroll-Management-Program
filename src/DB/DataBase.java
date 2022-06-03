@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataBase {
-	Connection conn; // java.sql.Connection
-	Statement stmt = null;
+	public Connection conn; // java.sql.Connection
+	public Statement stmt = null;
 	//database-1.cw1xm5bd9u21.ap-northeast-2.rds.amazonaws.com
 	//admin
 	//060100eh

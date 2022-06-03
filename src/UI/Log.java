@@ -82,12 +82,14 @@ public class Log extends JFrame {
 						}
 						if(my=true ) {
 							if(src.getString("직급")=="관리") {
-								Management_Main m1 = new  Management_Main(us1);
+								Management_Main m1 = new  Management_Main(input_id);
 								m1.setVisible(true);
+								break;
 							}
 							else {
-								Normal_Main n1 = new Normal_Main();
-								n1.setVisible(true);
+								Management_Main m1 = new  Management_Main(input_id);
+								m1.setVisible(true);
+								break;
 							}
 						}
 						
