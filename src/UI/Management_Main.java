@@ -51,6 +51,11 @@ import java.awt.FlowLayout;
 public class Management_Main extends JFrame {
 	String t="0";
 	int t2=0;
+	
+	int lh=0;
+	int lm=0;
+	int ls=0;
+	
 	boolean ts = true;
 	private JPanel contentPane;
 	private JTabbedPane tab1;
@@ -616,17 +621,17 @@ public class Management_Main extends JFrame {
 		lblNewLabel_4.setBounds(193, 177, 116, 113);
 		panel_6.add(lblNewLabel_4);
 		
-		JLabel hh = new JLabel("00");
+		JLabel hh = new JLabel("0");
 		hh.setFont(new Font("굴림", Font.PLAIN, 37));
 		hh.setBounds(123, 405, 60, 57);
 		panel5.add(hh);
 		
-		JLabel mm = new JLabel("00");
+		JLabel mm = new JLabel("0");
 		mm.setFont(new Font("굴림", Font.PLAIN, 37));
 		mm.setBounds(179, 405, 60, 57);
 		panel5.add(mm);
 		
-		JLabel ss = new JLabel("00");
+		JLabel ss = new JLabel("0");
 		ss.setFont(new Font("굴림", Font.PLAIN, 37));
 		ss.setBounds(238, 405, 60, 57);
 		panel5.add(ss);
@@ -644,6 +649,16 @@ public class Management_Main extends JFrame {
 									if(ts==false)break;
 									t2= t2+1;
 									ss.setText(Integer.toString(t2));
+									
+									if ( t2%60==0) {
+										lm = lm +1;
+										mm.setText(Integer.toString(lm));
+										ss.setText("0");
+									}
+									if( lm%60==0) {
+										lh= lh+1;
+										hh.setText(Integer.toString(lm));
+									}
 									
 									try {
 										Thread.sleep(1000);
@@ -675,9 +690,9 @@ public class Management_Main extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				ss.setText("00");
-				mm.setText("00");
-				hh.setText("00");
+				ss.setText("0");
+				mm.setText("0");
+				hh.setText("0");
 				
 				
 				LocalDate now = LocalDate.now();
@@ -729,6 +744,16 @@ public class Management_Main extends JFrame {
 		JLabel lblNewLabel_9 = new JLabel("이번달 출근 이력");
 		lblNewLabel_9.setBounds(145, 47, 148, 43);
 		panel_10.add(lblNewLabel_9);
+		
+		JLabel hh_1 = new JLabel(":");
+		hh_1.setFont(new Font("굴림", Font.PLAIN, 37));
+		hh_1.setBounds(158, 405, 25, 57);
+		panel5.add(hh_1);
+		
+		JLabel hh_2 = new JLabel(":");
+		hh_2.setFont(new Font("굴림", Font.PLAIN, 37));
+		hh_2.setBounds(206, 405, 60, 57);
+		panel5.add(hh_2);
 		
 		JLabel lblNewLabel = new JLabel("급여/사원 관리 시스템");
 		lblNewLabel.setForeground(Color.BLACK);

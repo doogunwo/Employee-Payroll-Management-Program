@@ -93,8 +93,6 @@ public class Log extends JFrame {
 							}
 						}
 						
-						
-						
 					}
 				}
 				catch (Exception e1) {
