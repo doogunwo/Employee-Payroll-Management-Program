@@ -69,7 +69,7 @@ public class Log extends JFrame {
 		BTN.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				User us1 = new User();
+				
 				try {
 					String str = "select 사원번호,비밀번호,직급 from 로그인정보";
 					ResultSet src =db.executeQurey(str);
@@ -83,6 +83,7 @@ public class Log extends JFrame {
 						if(my=true ) {
 							if(src.getString("직급")=="관리") {
 								Management_Main m1 = new  Management_Main(input_id);
+								
 								m1.setVisible(true);
 								break;
 							}
