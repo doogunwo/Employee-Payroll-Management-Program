@@ -55,14 +55,21 @@ import java.awt.FlowLayout;
 public class Management_Main extends JFrame {
 	String t = "0";
 	int t2 = 0;
-	
+
 	int lh = 0;
 	int lm = 0;
 	int ls = 0;
 	int t61 = 0;
-	
-	JLabel count ;
+	JLabel ta_5;
+	JLabel count;
 	JLabel timeTime;
+	JLabel ta_4;
+	JLabel ta_8;
+	JLabel ta_6;
+	JLabel ta_9;
+	JLabel ta_7;
+	JLabel ta_1;
+	JLabel ta_2;
 	boolean ts = true;
 	private JPanel contentPane;
 	private JTabbedPane tab1;
@@ -100,6 +107,7 @@ public class Management_Main extends JFrame {
 	public JTextField logtf4;
 	public JTextField logtf5;
 	public JTextField logtf6;
+	JLabel ta_3;
 
 	/**
 	 * Launch the application.
@@ -668,7 +676,7 @@ public class Management_Main extends JFrame {
 		panel5.add(panel_6);
 		panel_6.setLayout(null);
 
-		JLabel lblNewLabel_7 = new JLabel("나의 급여");
+		JLabel lblNewLabel_7 = new JLabel("나의 급여(6월)");
 		lblNewLabel_7.setFont(new Font("굴림", Font.BOLD, 16));
 		lblNewLabel_7.setBounds(12, 10, 137, 30);
 		panel_6.add(lblNewLabel_7);
@@ -723,40 +731,40 @@ public class Management_Main extends JFrame {
 		lblNewLabel_16.setBounds(200, 294, 57, 15);
 		panel_6.add(lblNewLabel_16);
 
-		JLabel ta_1 = new JLabel("1200000");
+		ta_1 = new JLabel("1200000");
 		ta_1.setBounds(79, 73, 62, 22);
 		panel_6.add(ta_1);
 
-		JLabel ta_2 = new JLabel("130000");
+		ta_2 = new JLabel("130000");
 		ta_2.setBounds(79, 123, 44, 22);
 		panel_6.add(ta_2);
 
-		JLabel ta_3 = new JLabel("0");
-		ta_3.setBounds(81, 182, 44, 22);
+		ta_3 = new JLabel("0");
+		ta_3.setBounds(81, 182, 68, 22);
 		panel_6.add(ta_3);
 
-		JLabel ta_4 = new JLabel("0");
-		ta_4.setBounds(79, 245, 44, 22);
+		ta_4 = new JLabel("0");
+		ta_4.setBounds(79, 245, 62, 22);
 		panel_6.add(ta_4);
 
-		JLabel ta_5 = new JLabel("0");
-		ta_5.setBounds(292, 73, 44, 22);
+		ta_5 = new JLabel("0");
+		ta_5.setBounds(292, 73, 62, 22);
 		panel_6.add(ta_5);
 
-		JLabel ta_6 = new JLabel("137000");
+		ta_6 = new JLabel("137000");
 		ta_6.setBounds(292, 123, 44, 22);
 		panel_6.add(ta_6);
 
-		JLabel ta_7 = new JLabel("177500");
+		ta_7 = new JLabel("177500");
 		ta_7.setBounds(292, 182, 44, 22);
 		panel_6.add(ta_7);
 
-		JLabel ta_8 = new JLabel("0");
-		ta_8.setBounds(292, 245, 44, 22);
+		ta_8 = new JLabel("0");
+		ta_8.setBounds(292, 245, 62, 22);
 		panel_6.add(ta_8);
 
-		JLabel ta_9 = new JLabel("0");
-		ta_9.setBounds(292, 294, 44, 22);
+		ta_9 = new JLabel("0");
+		ta_9.setBounds(292, 294, 72, 22);
 		panel_6.add(ta_9);
 
 		JLabel hh = new JLabel("0");
@@ -780,8 +788,7 @@ public class Management_Main extends JFrame {
 				btnNewButton_3.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
-						
+
 						t1 = new Thread() {
 							public void run() {
 								while (true) {
@@ -831,8 +838,6 @@ public class Management_Main extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				
-
 				LocalDate now = LocalDate.now();
 				DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
 				String fmtnow = now.format(fmt);
@@ -864,7 +869,7 @@ public class Management_Main extends JFrame {
 					e2.printStackTrace();
 				}
 				dispose();
-			
+
 			}
 		});
 
@@ -886,7 +891,7 @@ public class Management_Main extends JFrame {
 		lblNewLabel_4_1.setBounds(12, 50, 95, 30);
 		panel_10.add(lblNewLabel_4_1);
 
-		 count = new JLabel("0");
+		count = new JLabel("0");
 		count.setBounds(142, 14, 44, 22);
 		panel_10.add(count);
 
@@ -911,7 +916,7 @@ public class Management_Main extends JFrame {
 		hh_2.setFont(new Font("굴림", Font.PLAIN, 37));
 		hh_2.setBounds(266, 405, 25, 57);
 		panel5.add(hh_2);
-		
+
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setBounds(892, 23, 315, 57);
 		panel5.add(lblNewLabel_6);
@@ -921,13 +926,15 @@ public class Management_Main extends JFrame {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 		lblNewLabel.setBounds(22, 10, 189, 62);
 		contentPane.add(lblNewLabel);
-		//___________________________________________________________________
+		// ___________________________________________________________________
 		memberPart();
-		//___________________________________________________________________
+		// ___________________________________________________________________
 		record();
-		
-		
+		// ___________________________________________________________________
+		myPay();
+
 	}
+
 	private void memberPart() {
 		String str = "select 사원번호,이름,부서,연락처,직급,이메일 from 사원 where 사원번호=" + "'" + Id + "'";
 		ResultSet src = dbConn.executeQurey(str);
@@ -937,35 +944,78 @@ public class Management_Main extends JFrame {
 				logtf2.setText(src.getString("이름"));
 				logtf3.setText(src.getString("부서"));
 				logtf4.setText(src.getString("연락처"));
-				logtf5.setText(src.getString("직급"));
-				logtf6.setText(src.getString("이메일"));
+				logtf5.setText(src.getString("이메일"));
+				logtf6.setText(src.getString("직급"));
 
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	private void aPart() {
+
+	private void myPay() {
+		String cnt = count.getText();
+		String tt = timeTime.getText();
+		int m = 0;
+		int s = 0;
+		int extra =0;
+		int tax=0;
+		String pos = logtf6.getText();
+		if (pos.equals("주임")) {
+			m = 40000;
+			s = 5;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("대리")) {
+			m = 49000;
+			s = 6;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("팀장")) {
+			m = 80000;
+			s = 9;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("관리")) {
+			m = 30000;
+			s = 4;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("인턴")) {
+			m = 24000;
+			s = 1;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+
 		
-	}
-	private void mPart() {
+
+		ta_3.setText(Integer.toString(extra));
+		ta_5.setText(Integer.toString(tax));
+
+		int ssd1 = Integer.parseInt(ta_3.getText())+Integer.parseInt(ta_2.getText())+Integer.parseInt(ta_1.getText());
+		int ssd2 = Integer.parseInt(ta_5.getText())+Integer.parseInt(ta_6.getText())+Integer.parseInt(ta_7.getText());
+		ta_4.setText(Integer.toString(ssd1));
+		ta_8.setText(Integer.toString(ssd2));
 		
+		ta_9.setText(Integer.toString(ssd1-ssd2));
 	}
-	private void amPaer() {
-		
-	}
+
 	private void record() {
 		String str = "select 근무시간 from 근무기록 where 사원번호=" + "'" + Id + "'";
-		int cnt=0;
-		int totalTime =0;
+		int cnt = 0;
+		int totalTime = 0;
 		ResultSet src = dbConn.executeQurey(str);
 		try {
-			while(src.next()) {
+			while (src.next()) {
 				totalTime = totalTime + src.getInt("근무시간");
-				cnt =cnt+1;
+				cnt = cnt + 1;
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		timeTime.setText(Integer.toString(totalTime));
