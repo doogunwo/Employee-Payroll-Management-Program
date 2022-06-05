@@ -70,6 +70,21 @@ public class Management_Main extends JFrame {
 	JLabel ta_7;
 	JLabel ta_1;
 	JLabel ta_2;
+	
+	
+	JLabel ta_1_1;
+	JLabel ta_2_1;
+	JLabel ta_3_1;
+	JLabel ta_4_1;
+	JLabel ta_5_1;
+	JLabel ta_6_1;
+	JLabel ta_7_1;
+	JLabel ta_8_1;
+	JLabel ta_9_1;
+	
+	JLabel timeTime_1;
+	JLabel count_1;
+	
 	boolean ts = true;
 	private JPanel contentPane;
 	private JTabbedPane tab1;
@@ -589,12 +604,6 @@ public class Management_Main extends JFrame {
 		}
 		sc2.setLayout(null);
 
-		JPanel panel_8 = new JPanel();
-
-		JLabel no1 = new JLabel("1");
-		no1.setBounds(49, 76, 106, 55);
-		panel_8.add(no1);
-
 		sc4_1 = new JScrollPane(table2);
 		sc4_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -603,7 +612,12 @@ public class Management_Main extends JFrame {
 
 					int row = table2.getSelectedRow();
 
-					System.out.print(table2.getValueAt(row, 0));
+					System.out.println(table2.getValueAt(row, 0));
+					
+					
+					clickedRecord((String) table2.getValueAt(row, 0));
+					clickedPay((String) table2.getValueAt(row, 0));
+					
 				}
 
 			}
@@ -613,19 +627,133 @@ public class Management_Main extends JFrame {
 		sc4_1.setBounds(0, 0, 790, 642);
 
 		panel_7.add(sc4_1);
-
-		panel_8.setBounds(858, 10, 482, 366);
-		panel4.add(panel_8);
-		panel_8.setLayout(null);
-
-		JPanel panel_9 = new JPanel();
-		panel_9.setBounds(858, 404, 483, 244);
-		panel4.add(panel_9);
-		panel_9.setLayout(null);
-
-		JLabel lblNewLabel_5 = new JLabel("클릭한 사원 출근내역");
-		lblNewLabel_5.setBounds(120, 72, 245, 50);
-		panel_9.add(lblNewLabel_5);
+		
+		JPanel panel_6_1 = new JPanel();
+		panel_6_1.setLayout(null);
+		panel_6_1.setBounds(858, 10, 464, 361);
+		panel4.add(panel_6_1);
+		
+		JLabel lblNewLabel_7_1 = new JLabel("나의 급여(6월)");
+		lblNewLabel_7_1.setFont(new Font("굴림", Font.BOLD, 16));
+		lblNewLabel_7_1.setBounds(12, 10, 137, 30);
+		panel_6_1.add(lblNewLabel_7_1);
+		
+		JLabel lblNewLabel_8_2 = new JLabel("기본금");
+		lblNewLabel_8_2.setBounds(12, 60, 72, 40);
+		panel_6_1.add(lblNewLabel_8_2);
+		
+		JLabel lblNewLabel_8_1_1 = new JLabel("식대");
+		lblNewLabel_8_1_1.setBounds(12, 110, 72, 40);
+		panel_6_1.add(lblNewLabel_8_1_1);
+		
+		JLabel lblNewLabel_10_1 = new JLabel("");
+		lblNewLabel_10_1.setBounds(12, 168, 57, 15);
+		panel_6_1.add(lblNewLabel_10_1);
+		
+		JLabel lblNewLabel_11_2 = new JLabel("지급");
+		lblNewLabel_11_2.setFont(new Font("굴림", Font.BOLD, 16));
+		lblNewLabel_11_2.setBounds(79, 39, 62, 30);
+		panel_6_1.add(lblNewLabel_11_2);
+		
+		JLabel lblNewLabel_12_1 = new JLabel("수당");
+		lblNewLabel_12_1.setBounds(12, 182, 57, 15);
+		panel_6_1.add(lblNewLabel_12_1);
+		
+		JLabel lblNewLabel_11_1_1 = new JLabel("공제");
+		lblNewLabel_11_1_1.setFont(new Font("굴림", Font.BOLD, 16));
+		lblNewLabel_11_1_1.setBounds(292, 39, 62, 30);
+		panel_6_1.add(lblNewLabel_11_1_1);
+		
+		JLabel lblNewLabel_13_2 = new JLabel("소득세");
+		lblNewLabel_13_2.setBounds(200, 73, 57, 15);
+		panel_6_1.add(lblNewLabel_13_2);
+		
+		JLabel lblNewLabel_13_1_1 = new JLabel("건강보험");
+		lblNewLabel_13_1_1.setBounds(200, 123, 57, 15);
+		panel_6_1.add(lblNewLabel_13_1_1);
+		
+		JLabel lblNewLabel_14_1 = new JLabel("국민연금");
+		lblNewLabel_14_1.setBounds(200, 182, 57, 15);
+		panel_6_1.add(lblNewLabel_14_1);
+		
+		JLabel lblNewLabel_15_2 = new JLabel("지급액");
+		lblNewLabel_15_2.setBounds(12, 245, 57, 15);
+		panel_6_1.add(lblNewLabel_15_2);
+		
+		JLabel lblNewLabel_15_1_1 = new JLabel("공제액");
+		lblNewLabel_15_1_1.setBounds(200, 245, 57, 15);
+		panel_6_1.add(lblNewLabel_15_1_1);
+		
+		JLabel lblNewLabel_16_1 = new JLabel("실수령 액");
+		lblNewLabel_16_1.setBounds(200, 294, 57, 15);
+		panel_6_1.add(lblNewLabel_16_1);
+		
+		ta_1_1 = new JLabel("1200000");
+		ta_1_1.setBounds(79, 73, 62, 22);
+		panel_6_1.add(ta_1_1);
+		
+		ta_2_1 = new JLabel("130000");
+		ta_2_1.setBounds(79, 123, 44, 22);
+		panel_6_1.add(ta_2_1);
+		
+		ta_3_1 = new JLabel("0");
+		ta_3_1.setBounds(81, 182, 68, 22);
+		panel_6_1.add(ta_3_1);
+		
+		ta_4_1 = new JLabel("1330000");
+		ta_4_1.setBounds(79, 245, 62, 22);
+		panel_6_1.add(ta_4_1);
+		
+		ta_5_1 = new JLabel("0");
+		ta_5_1.setBounds(292, 73, 62, 22);
+		panel_6_1.add(ta_5_1);
+		
+		ta_6_1 = new JLabel("137000");
+		ta_6_1.setBounds(292, 123, 44, 22);
+		panel_6_1.add(ta_6_1);
+		
+		ta_7_1 = new JLabel("177500");
+		ta_7_1.setBounds(292, 182, 44, 22);
+		panel_6_1.add(ta_7_1);
+		
+		ta_8_1 = new JLabel("314500");
+		ta_8_1.setBounds(292, 245, 62, 22);
+		panel_6_1.add(ta_8_1);
+		
+		ta_9_1 = new JLabel("1015500");
+		ta_9_1.setBounds(292, 294, 72, 22);
+		panel_6_1.add(ta_9_1);
+		
+		JPanel panel_10_1 = new JPanel();
+		panel_10_1.setLayout(null);
+		panel_10_1.setBounds(858, 404, 462, 171);
+		panel4.add(panel_10_1);
+		
+		JLabel lblNewLabel_4_2 = new JLabel("총 출근 횟수");
+		lblNewLabel_4_2.setFont(new Font("굴림", Font.BOLD, 12));
+		lblNewLabel_4_2.setBounds(12, 10, 95, 30);
+		panel_10_1.add(lblNewLabel_4_2);
+		
+		JLabel lblNewLabel_4_1_1 = new JLabel("총 근무 시간");
+		lblNewLabel_4_1_1.setFont(new Font("굴림", Font.BOLD, 12));
+		lblNewLabel_4_1_1.setBounds(12, 50, 95, 30);
+		panel_10_1.add(lblNewLabel_4_1_1);
+		
+		count_1 = new JLabel("0");
+		count_1.setBounds(142, 14, 44, 22);
+		panel_10_1.add(count_1);
+		
+		timeTime_1 = new JLabel("0");
+		timeTime_1.setBounds(142, 54, 49, 22);
+		panel_10_1.add(timeTime_1);
+		
+		JLabel lblNewLabel_6_1_1_2 = new JLabel("초(s)");
+		lblNewLabel_6_1_1_2.setBounds(233, 54, 49, 22);
+		panel_10_1.add(lblNewLabel_6_1_1_2);
+		
+		JLabel lblNewLabel_6_1_1_1_1 = new JLabel("번");
+		lblNewLabel_6_1_1_1_1.setBounds(233, 14, 49, 22);
+		panel_10_1.add(lblNewLabel_6_1_1_1_1);
 
 		Panel panel5 = new Panel();
 		tab1.addTab("TAB4", null, panel5, null);
@@ -934,7 +1062,87 @@ public class Management_Main extends JFrame {
 		myPay();
 
 	}
+	private void clickedPay(String id) {
+		
+		String cnt = count_1.getText();
+		String tt = timeTime_1.getText();
+		int m = 0;
+		int s = 0;
+		int extra =0;
+		int tax=0;
+		String pos="0" ;
+		String sql5 = "select 직급 from 사원 where 사원번호=" + "'" + id + "'";
+		//String str = "select 근무시간 from 근무기록 where 사원번호=" + "'" + Id + "'";
+		ResultSet src = dbConn.executeQurey(sql5);
+		try {
+			while (src.next()) {
+				pos = src.getString("직급");
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		if (pos.equals("주임")) {
+			m = 40000;
+			s = 5;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("대리")) {
+			m = 49000;
+			s = 6;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("팀장")) {
+			m = 80000;
+			s = 9;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("관리")) {
+			m = 30000;
+			s = 4;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
+		if (pos.equals("인턴")) {
+			m = 24000;
+			s = 1;
+			extra = Integer.parseInt(cnt) * m + Integer.parseInt(tt) * s;
+			tax = extra / 12;
+		}
 
+		
+
+		ta_3_1.setText(Integer.toString(extra));
+		ta_5_1.setText(Integer.toString(tax));
+
+		int ssd1 = Integer.parseInt(ta_3_1.getText())+Integer.parseInt(ta_2_1.getText())+Integer.parseInt(ta_1_1.getText());
+		int ssd2 = Integer.parseInt(ta_5_1.getText())+Integer.parseInt(ta_6_1.getText())+Integer.parseInt(ta_7_1.getText());
+		ta_4_1.setText(Integer.toString(ssd1));
+		ta_8_1.setText(Integer.toString(ssd2));
+		
+		ta_9_1.setText(Integer.toString(ssd1-ssd2));
+	}
+	private void clickedRecord(String id) {
+		String str = "select 근무시간 from 근무기록 where 사원번호=" + "'" + id + "'";
+		int cnt = 0;
+		int totalTime = 0;
+		ResultSet src = dbConn.executeQurey(str);
+		try {
+			while (src.next()) {
+				totalTime = totalTime + src.getInt("근무시간");
+				cnt = cnt + 1;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		timeTime_1.setText(Integer.toString(totalTime));
+		count_1.setText(Integer.toString(cnt));
+	}
 	private void memberPart() {
 		String str = "select 사원번호,이름,부서,연락처,직급,이메일 from 사원 where 사원번호=" + "'" + Id + "'";
 		ResultSet src = dbConn.executeQurey(str);
